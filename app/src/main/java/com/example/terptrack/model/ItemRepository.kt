@@ -2,6 +2,8 @@ package com.umd.terptrack.model
 
 import android.util.Log
 import com.google.firebase.firestore.FirebaseFirestore
+import android.net.Uri
+import com.google.firebase.storage.FirebaseStorage
 
 
 // This is for the firebase repository letting the app push data
@@ -12,6 +14,8 @@ class ItemRepository {
     private val db = FirebaseFirestore.getInstance()
     // the collection name where items are stored
     private val collectionRef = db.collection("lost_items")
+    // ref to fb storage for images
+    private val storageRef = FirebaseStorage.getInstance().reference
 
     // func to add a new item to the database (POST request)
     fun addItem(item: LostItem, onSuccess: () -> Unit, onFailure: (Exception) -> Unit) {
@@ -44,6 +48,24 @@ class ItemRepository {
             }
             .addOnFailureListener { e ->
                 Log.w("Firebase", "Error getting documents", e)
+                onFailure(e)
+            }
+    }
+
+    // func to upload photo to storage and get the download URL back
+    fun uploadImage(imageUri: Uri, onSuccess: (String) -> Unit, onFailure: (Exception) -> Unit) {
+        val fileName = "images/${System.currentTimeMillis()}.jpg"
+        val fileRef = storageRef.child(fileName)
+
+        fileRef.putFile(imageUri)
+            .addOnSuccessListener {
+                // if upload is successful, get the URL to store in Firestore
+                fileRef.downloadUrl.addOnSuccessListener { uri ->
+                    onSuccess(uri.toString())
+                }
+            }
+            .addOnFailureListener { e ->
+                Log.w("Firebase", "Error uploading image", e)
                 onFailure(e)
             }
     }

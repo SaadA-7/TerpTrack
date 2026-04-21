@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="16dp"
+    android:layout_marginBottom="8dp"
+    android:background="#F5F5F5">
+
+    <ImageView
+        android:id="@+id/imageItemThumbnail"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:background="#CCCCCC"
+        android:scaleType="centerCrop"
+        android:layout_marginEnd="16dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textDescription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Item Description"
+            android:textStyle="bold"
+            android:textSize="18sp"/>
+
+        <TextView
+            android:id="@+id/textBuilding"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Building Name"
+            android:textSize="14sp"/>
+
+        <RatingBar
+            android:id="@+id/ratingItemCondition"
+            style="?android:attr/ratingBarStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:numStars="5"
+            android:layout_marginTop="4dp"/>
+    </LinearLayout>
+</LinearLayout>
