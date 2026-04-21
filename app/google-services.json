@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "841700437698",
+    "project_id": "terptrack-scma",
+    "storage_bucket": "terptrack-scma.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:841700437698:android:bb01355ae37f0b1182955b",
+        "android_client_info": {
+          "package_name": "com.example.terptrack"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDyTO_D1Jye74hnClKmBmX2fYnrT0guH-E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
