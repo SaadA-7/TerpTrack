@@ -1,10 +1,99 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<!-- This is the layout for submitting a item, these items will need to be inputted into the database
+Things to note, I added a title here, this is not in the firebase db right now but i think it should be
+the location should be auto filled by code using gps, but we also have an autocomplete that would
+also have to be filled by code like for the other project, if we dont want this we can just put a
+regular textview/edittext-->
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="16dp"
     tools:context=".controller.ReportItemActivity">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ImageView
+        android:id="@+id/imgPhotoPreview"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_alignParentTop="true"
+        android:scaleType="centerCrop"
+        android:background="#E0E0E0"
+        android:contentDescription="Photo preview" />
+
+    <!--item title, needs to be added to firebase if we go through -->
+    <EditText
+        android:id="@+id/etTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/imgPhotoPreview"
+        android:layout_marginTop="16dp"
+        android:hint="Item title (e.g. Blue Backpack)"
+        android:inputType="textCapSentences"
+        android:maxLines="1"
+        android:background="@android:drawable/edit_text"
+        android:padding="8dp" />
+
+    <!--item description -->
+    <EditText
+        android:id="@+id/etDescription"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:layout_below="@id/etTitle"
+        android:layout_marginTop="16dp"
+        android:hint="Describe the item..."
+        android:gravity="top"
+        android:inputType="textMultiLine"
+        android:background="@android:drawable/edit_text"
+        android:padding="8dp" />
+
+    <!--this is the autocomplete that we can change -->
+    <AutoCompleteTextView
+        android:id="@+id/etLocation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/etDescription"
+        android:layout_marginTop="12dp"
+        android:hint="Location (auto-filled by GPS)"
+        android:inputType="textPostalAddress"
+        android:maxLines="1"
+        android:completionThreshold="2"
+        android:background="@android:drawable/edit_text"
+        android:padding="8dp" />
+
+    <!--rating bar for condition.-->
+    <RatingBar
+        android:id="@+id/ratingBarCondition"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/etLocation"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        android:numStars="5"
+        android:stepSize="1"
+        android:rating="3" />
+
+    <!-- button for taking photo, when clcike don the app needs to make use of the dangerous permission
+    -->
+    <Button
+        android:id="@+id/btnChoosePhoto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:text="Take photo"
+        android:layout_marginStart="20dp"/>
+
+    <!-- submit button to submit to the database and then return to activity main -->
+    <Button
+        android:id="@+id/btnSubmit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:text="Submit"
+        android:layout_marginEnd="20dp"
+        />
+
+</RelativeLayout>

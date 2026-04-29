@@ -7,7 +7,7 @@ import android.widget.ImageView
 import android.widget.RatingBar
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.umd.terptrack.R
+import com.example.terptrack.R
 import com.umd.terptrack.model.LostItem
 
 class ItemAdapter(

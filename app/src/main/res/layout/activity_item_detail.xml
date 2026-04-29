@@ -1,10 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<!-- this is the xml for showing the items details after clicking on it in the recyclerview
+items should be passed form recyclerview code, so we can hit that project mark-->
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="16dp"
     tools:context=".controller.ItemDetailActivity">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <!-- Title of what the item is -->
+    <TextView
+        android:id="@+id/tvDetailTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textColor="@color/colorPrimary"
+         />
+
+    <!-- location should be building  -->
+    <TextView
+        android:id="@+id/tvDetailLocation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvDetailTitle"
+        android:layout_marginTop="8dp"
+        android:textSize="14sp"
+        />
+
+    <!-- image  -->
+    <ImageView
+        android:id="@+id/imgDetailPhoto"
+        android:layout_width="match_parent"
+        android:layout_height="220dp"
+        android:layout_below="@id/tvDetailLocation"
+        android:layout_marginTop="12dp"
+        android:scaleType="centerCrop"
+        android:background="#E0E0E0"
+         />
+
+    <!-- desc of item-->
+    <TextView
+        android:id="@+id/tvDetailDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/imgDetailPhoto"
+        android:layout_marginTop="12dp"
+        android:textSize="15sp"
+        android:lineSpacingMultiplier="1.4"
+         />
+
+    <!-- Back button to activity main -->
+    <Button
+        android:id="@+id/btnBack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:text="Back" />
+
+</RelativeLayout>
