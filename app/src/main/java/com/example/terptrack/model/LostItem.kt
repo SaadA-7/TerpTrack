@@ -2,6 +2,7 @@ package com.umd.terptrack.model
 
 data class LostItem(
     val id: String = "",
+    val title: String= "",
     val description: String = "",
     val buildingName: String = "",
     val imageUrl: String = "",
