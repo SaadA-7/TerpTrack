@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- this is the xml for showing the items details after clicking on it in the recyclerview
-items should be passed form recyclerview code, so we can hit that project mark-->
+<!-- Detail view: all data passed in via Intent extras from MainActivity -->
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp"
@@ -18,7 +18,7 @@ items should be passed form recyclerview code, so we can hit that project mark--
         android:textSize="24sp"
         android:textStyle="bold"
         android:textColor="@color/colorPrimary"
-         />
+        />
 
     <!-- location should be building  -->
     <TextView
@@ -39,14 +39,25 @@ items should be passed form recyclerview code, so we can hit that project mark--
         android:layout_marginTop="12dp"
         android:scaleType="centerCrop"
         android:background="#E0E0E0"
-         />
+        android:contentDescription="Item photo" />
+
+    <!-- Read-only RatingBar: shows condition the reporter assigned (isIndicator=true in code) -->
+    <RatingBar
+        android:id="@+id/ratingDetailCondition"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/imgDetailPhoto"
+        android:layout_marginTop="10dp"
+        android:numStars="5"
+        android:stepSize="1"
+        tools:rating="3" />
 
     <!-- desc of item-->
     <TextView
         android:id="@+id/tvDetailDescription"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/imgDetailPhoto"
+        android:layout_below="@id/ratingDetailCondition"
         android:layout_marginTop="12dp"
         android:textSize="15sp"
         android:lineSpacingMultiplier="1.4"

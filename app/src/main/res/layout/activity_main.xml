@@ -4,21 +4,52 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:id="@+id/main"
     tools:context=".controller.MainActivity">
 
-    <!-- this is text for the seek bar -->
+    <!-- Welcome banner — text is set from SharedPreferences in MainActivity.kt -->
     <TextView
-        android:layout_width="wrap_content"
+        android:id="@+id/tvWelcome"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Filter by Distance"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="4dp"
+        android:textSize="16sp"
         android:textStyle="bold"
-        android:padding="8dp" />
-    <!-- so right now we have a seek with a max value of 5 (miles?) and it starts at 1
-    we can add a text view if we want to show the actual number, this will require code-->
+        android:textColor="@color/colorPrimary"
+        tools:text="Welcome back, Terrappin!" />
+
+    <!-- Row: "Filter by Distance" label + live value-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp"
+        android:paddingTop="8dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Filter by Distance"
+            android:textStyle="bold" />
+
+        <!-- Updated live by the SeekBar listener -->
+        <TextView
+            android:id="@+id/tvSeekValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textColor="@color/colorPrimary"
+            tools:text="1 mi" />
+    </LinearLayout>
+
     <SeekBar
         android:id="@+id/seekBarDistance"
         android:layout_width="match_parent"
@@ -53,6 +84,16 @@
         android:textSize="16sp"
         android:textStyle="bold"
         android:backgroundTint="@color/colorPrimary"
+        android:textColor="@android:color/white" />
+
+    <!--button to go to the settings screen-->
+    <Button
+        android:id="@+id/btnSettings"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Settings"
+        android:textSize="14sp"
+        android:backgroundTint="#455A64"
         android:textColor="@android:color/white" />
 
     <!-- this is the linear layout for the ad banner-->
