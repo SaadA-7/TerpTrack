@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
-    <uses-permission android:name="android.permission.INTERNET"/>
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <!-- Camera and GPS permissions (dangerous — must also be requested at runtime) -->
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -12,26 +19,35 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TerpTrack">
 
-
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-3940256099942544~3347511713"/>
-        <activity
-            android:name=".controller.ItemDetailActivity"
-            android:exported="false" />
-        <activity
-            android:name=".controller.ReportItemActivity"
-            android:exported="false" />
+            android:value="ca-app-pub-3940256099942544~3347511713" />
+
+        <!-- Main Controller activity -->
         <activity
             android:name=".controller.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
+
+        <!-- Receives LostItem fields via Intent extras -->
+        <activity
+            android:name=".controller.ItemDetailActivity"
+            android:exported="false" />
+
+        <!-- Report screen -->
+        <activity
+            android:name=".controller.ReportItemActivity"
+            android:exported="false" />
+
+        <!-- Settings screen -->
+        <activity
+            android:name=".controller.SettingsActivity"
+            android:exported="false" />
+
     </application>
 
 </manifest>

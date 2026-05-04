@@ -50,6 +50,7 @@
         android:layout_marginTop="10dp"
         android:numStars="5"
         android:stepSize="1"
+        android:isIndicator="true"
         tools:rating="3" />
 
     <!-- desc of item-->
