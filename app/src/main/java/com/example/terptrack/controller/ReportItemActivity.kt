@@ -46,6 +46,11 @@ class ReportItemActivity : AppCompatActivity() {
         val fvRatingBar= findViewById<RatingBar>(R.id.ratingBarCondition)
         val btnPhoto= findViewById<Button>(R.id.btnChoosePhoto)
         val btnSubmit= findViewById<Button>(R.id.btnSubmit)
+        val btnCancel= findViewById<Button>(R.id.btnBack)
+
+        btnCancel.setOnClickListener {
+            finish()
+        }
 
         fvRatingBar.onRatingBarChangeListener =
             RatingBar.OnRatingBarChangeListener { _, rating, fromUser ->

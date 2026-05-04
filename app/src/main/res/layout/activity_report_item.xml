@@ -75,26 +75,39 @@ regular textview/edittext-->
         android:stepSize="1"
         android:rating="3" />
 
-    <!-- button for taking photo, when clcike don the app needs to make use of the dangerous permission
-    -->
-    <Button
-        android:id="@+id/btnChoosePhoto"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true"
-        android:text="Take photo"
-        android:layout_marginStart="20dp"/>
 
-    <!-- submit button to submit to the database and then return to activity main -->
-    <Button
-        android:id="@+id/btnSubmit"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:text="Submit"
-        android:layout_marginEnd="20dp"
-        />
+        android:orientation="horizontal"
+        android:gravity="center">
+        <!-- button for taking photo, when clcike don the app needs to make use of the dangerous permission
+           -->
+        <Button
+            android:id="@+id/btnChoosePhoto"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Take photo"
+            android:layout_margin="8dp"/>
+
+        <Button
+            android:id="@+id/btnBack"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Cancel"
+            android:layout_margin="8dp"/>
+        <!-- submit button to submit to the database and then return to activity main -->
+        <Button
+            android:id="@+id/btnSubmit"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Submit"
+            android:layout_margin="8dp"/>
+
+    </LinearLayout>
 
 </RelativeLayout>
