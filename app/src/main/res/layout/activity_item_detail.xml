@@ -1,76 +1,84 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Detail view: all data passed in via Intent extras from MainActivity -->
-<RelativeLayout
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
+    android:fillViewport="true"
     tools:context=".controller.ItemDetailActivity">
 
-    <!-- Title of what the item is -->
-    <TextView
-        android:id="@+id/tvDetailTitle"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        android:textColor="@color/colorPrimary"
-        />
+        android:orientation="vertical"
+        android:padding="16dp">
 
-    <!-- location should be building  -->
-    <TextView
-        android:id="@+id/tvDetailLocation"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/tvDetailTitle"
-        android:layout_marginTop="8dp"
-        android:textSize="14sp"
-        />
+        <TextView
+            android:id="@+id/tvDetailTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:textColor="@color/colorPrimary" />
 
-    <!-- image  -->
-    <ImageView
-        android:id="@+id/imgDetailPhoto"
-        android:layout_width="match_parent"
-        android:layout_height="220dp"
-        android:layout_below="@id/tvDetailLocation"
-        android:layout_marginTop="12dp"
-        android:scaleType="centerCrop"
-        android:background="#E0E0E0"
-        android:contentDescription="Item photo" />
+        <TextView
+            android:id="@+id/tvDetailLocation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:textSize="14sp" />
 
-    <!-- Read-only RatingBar: shows condition the reporter assigned (isIndicator=true in code) -->
-    <RatingBar
-        android:id="@+id/ratingDetailCondition"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/imgDetailPhoto"
-        android:layout_marginTop="10dp"
-        android:numStars="5"
-        android:stepSize="1"
-        android:isIndicator="true"
-        tools:rating="3" />
+        <ImageView
+            android:id="@+id/imgDetailPhoto"
+            android:layout_width="match_parent"
+            android:layout_height="220dp"
+            android:layout_marginTop="12dp"
+            android:scaleType="centerCrop"
+            android:background="#E0E0E0"
+            android:contentDescription="Item photo" />
 
-    <!-- desc of item-->
-    <TextView
-        android:id="@+id/tvDetailDescription"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/ratingDetailCondition"
-        android:layout_marginTop="12dp"
-        android:textSize="15sp"
-        android:lineSpacingMultiplier="1.4"
-         />
+        <RatingBar
+            android:id="@+id/ratingDetailCondition"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:numStars="5"
+            android:stepSize="1"
+            android:isIndicator="true"
+            tools:rating="3" />
 
-    <!-- Back button to activity main -->
-    <Button
-        android:id="@+id/btnBack"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:text="Back" />
+        <TextView
+            android:id="@+id/tvDetailDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:textSize="15sp"
+            android:lineSpacingMultiplier="1.4" />
 
-</RelativeLayout>
+        <!-- PART 3: Google Map -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Location on Map"
+            android:textStyle="bold"
+            android:textSize="14sp" />
+
+        <com.google.android.gms.maps.MapView
+            android:id="@+id/mapViewDetail"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:layout_marginTop="8dp" />
+
+        <Button
+            android:id="@+id/btnBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="16dp"
+            android:text="Back" />
+
+    </LinearLayout>
+
+</ScrollView>

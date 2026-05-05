@@ -9,6 +9,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.terptrack.R
 import com.umd.terptrack.model.LostItem
+import com.bumptech.glide.Glide
 
 class ItemAdapter(
     private var items: List<LostItem>,
@@ -35,8 +36,17 @@ class ItemAdapter(
         holder.textBuilding.text = item.buildingName
         holder.ratingCondition.rating = item.conditionRating
 
-        // Note: loading the actual image URL into the ImageView requires a library like Glide
-        // For now, it will just show the gray placeholder box.
+        // PART 3: Load Firebase image URL using Glide
+        if (item.imageUrl.isNotEmpty()) {
+            Glide.with(holder.itemView.context)
+                .load(item.imageUrl)
+                .placeholder(android.R.drawable.ic_menu_gallery)
+                .error(android.R.drawable.ic_menu_report_image)
+                .centerCrop()
+                .into(holder.imageThumbnail)
+        } else {
+            holder.imageThumbnail.setImageResource(android.R.drawable.ic_menu_gallery)
+        }
 
         holder.itemView.setOnClickListener {
             onItemClick(item)

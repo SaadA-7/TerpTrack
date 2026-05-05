@@ -53,6 +53,9 @@ class MainActivity : AppCompatActivity() {
                 putExtra(EXTRA_IMAGE_URL, i.imageUrl)
                 putExtra(EXTRA_RATING,i.conditionRating)
                 putExtra(EXTRA_TIMESTAMP,i.timestamp)
+                // PART 3: Pass GPS coordinates to detail map
+                putExtra(EXTRA_LATITUDE, i.latitude)
+                putExtra(EXTRA_LONGITUDE, i.longitude)
             })
         }
 
@@ -139,5 +142,8 @@ class MainActivity : AppCompatActivity() {
         const val EXTRA_IMAGE_URL= "extra_image_url"
         const val EXTRA_RATING= "extra_rating"
         const val EXTRA_TIMESTAMP= "extra_timestamp"
+        // PART 3: New extras for map coordinates
+        const val EXTRA_LATITUDE = "extra_latitude"
+        const val EXTRA_LONGITUDE = "extra_longitude"
     }
 }
