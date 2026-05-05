@@ -50,6 +50,7 @@ regular textview/edittext-->
         android:padding="8dp" />
 
     <!--this is the autocomplete that we can change -->
+    <!--  Adding the google map container, push bar down below map - s  -->
     <AutoCompleteTextView
         android:id="@+id/etLocation"
         android:layout_width="match_parent"
@@ -63,12 +64,19 @@ regular textview/edittext-->
         android:background="@android:drawable/edit_text"
         android:padding="8dp" />
 
-    <!--rating bar for condition.-->
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/mapFragment"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_below="@id/etLocation"
+        android:layout_marginTop="12dp" />
+
     <RatingBar
         android:id="@+id/ratingBarCondition"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/etLocation"
+        android:layout_below="@id/mapFragment"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="16dp"
         android:numStars="5"

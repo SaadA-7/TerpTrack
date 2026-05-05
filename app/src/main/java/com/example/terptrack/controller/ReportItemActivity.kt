@@ -25,6 +25,12 @@ import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.location.Priority
 import com.google.android.gms.tasks.CancellationTokenSource
+import com.google.android.gms.maps.CameraUpdateFactory
+import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.OnMapReadyCallback
+import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.MarkerOptions
 import com.umd.terptrack.model.ItemRepository
 import com.umd.terptrack.model.LostItem
 import java.io.File
@@ -32,8 +38,10 @@ import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 
-class ReportItemActivity : AppCompatActivity() {
+class ReportItemActivity : AppCompatActivity(), OnMapReadyCallback {
 
+    // edit - add Google Map reference
+    private var mMap: GoogleMap? = null
     private val repository = ItemRepository()
     private var currentRating: Float = 3f
     private var selectedImageUri: Uri? = null
@@ -92,10 +100,42 @@ class ReportItemActivity : AppCompatActivity() {
         val fvTitle = findViewById<EditText>(R.id.etTitle)
         val fvDescription = findViewById<EditText>(R.id.etDescription)
         val fvLocation = findViewById<AutoCompleteTextView>(R.id.etLocation)
+
+        // edit - listen for when the user types an address and hits "Enter" or "Done"
+        fvLocation.setOnEditorActionListener { _, actionId, _ ->
+            val locationName = fvLocation.text.toString().trim()
+            if (locationName.isNotEmpty()) {
+                try {
+                    val geocoder = Geocoder(this, Locale.getDefault())
+                    // Convert the typed address into coordinates
+                    val addresses = geocoder.getFromLocationName(locationName, 1)
+
+                    if (!addresses.isNullOrEmpty()) {
+                        val address = addresses[0]
+                        // Update our global variables for the Submit button
+                        currentLatitude = address.latitude
+                        currentLongitude = address.longitude
+                        // Move the map!
+                        updateMapLocation(currentLatitude, currentLongitude)
+                        Toast.makeText(this, "Map updated", Toast.LENGTH_SHORT).show()
+                    } else {
+                        Toast.makeText(this, "Could not find that address on the map", Toast.LENGTH_SHORT).show()
+                    }
+                } catch (e: Exception) {
+                    Log.e("GPS", "Geocode from text failed", e)
+                }
+            }
+            false // Returns false to let the keyboard close normally
+        }
+
         val fvRatingBar = findViewById<RatingBar>(R.id.ratingBarCondition)
         val btnPhoto = findViewById<Button>(R.id.btnChoosePhoto)
         val btnSubmit = findViewById<Button>(R.id.btnSubmit)
         val btnCancel = findViewById<Button>(R.id.btnBack)
+        // edit - Initialize Google Map
+        val mapFragment = supportFragmentManager
+            .findFragmentById(R.id.mapFragment) as SupportMapFragment
+        mapFragment.getMapAsync(this)
 
         // PART 3: Initialize location client and auto-fill GPS
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
@@ -197,6 +237,9 @@ class ReportItemActivity : AppCompatActivity() {
                     currentLatitude = location.latitude
                     currentLongitude = location.longitude
 
+                    // edit - tell the map to move to this location
+                    updateMapLocation(currentLatitude, currentLongitude)
+
                     try {
                         val geocoder = Geocoder(this, Locale.getDefault())
                         val addresses = geocoder.getFromLocation(location.latitude, location.longitude, 1)
@@ -247,4 +290,23 @@ class ReportItemActivity : AppCompatActivity() {
             }
         )
     }
+
+    // Edit - add Map Logic
+    override fun onMapReady(googleMap: GoogleMap) {
+        mMap = googleMap
+        // If GPS already found our location before the map finished loading, update it now
+        if (currentLatitude != 0.0 && currentLongitude != 0.0) {
+            updateMapLocation(currentLatitude, currentLongitude)
+        }
+    }
+
+    private fun updateMapLocation(lat: Double, lng: Double) {
+        val currentLatLng = LatLng(lat, lng)
+        mMap?.let { map ->
+            map.clear() // Clear old markers
+            map.addMarker(MarkerOptions().position(currentLatLng).title("You are here"))
+            map.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng, 16f))
+        }
+    }
+
 }
