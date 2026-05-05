@@ -32,7 +32,7 @@ class ItemAdapter(
 
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
         val item = items[position]
-        holder.textDescription.text = item.description
+        holder.textDescription.text = item.title
         holder.textBuilding.text = item.buildingName
         holder.ratingCondition.rating = item.conditionRating
 
