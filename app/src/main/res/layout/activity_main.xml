@@ -58,7 +58,7 @@
         android:paddingStart="8dp"
         android:paddingEnd="8dp"
         android:paddingBottom="8dp"
-        android:progress="1" />
+        android:progress="0" />
 
     <!--RecyclerView for the items that we have
      We can build the layout of the contents by code  -->

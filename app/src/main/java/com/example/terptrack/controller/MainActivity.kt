@@ -130,6 +130,21 @@ class MainActivity : AppCompatActivity() {
         super.onResume()
         val name = preferences.getString(KEY_DISPLAY_NAME, "Terp")
         findViewById<TextView>(R.id.tvWelcome).text = "Welcome back, $name!"
+
+        repository.getAllItems(
+            onResult = { i ->
+                items = i
+                val progress = findViewById<SeekBar>(R.id.seekBarDistance).progress
+                val filtered = if (progress == 0) {
+                    items
+                }
+                else {
+                    items.filter { e -> e.conditionRating <= progress }
+                }
+                adapter.updateData(filtered)
+            },
+            onFailure = {}
+        )
     }
 
     companion object {
