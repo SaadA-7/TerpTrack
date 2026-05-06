@@ -54,7 +54,7 @@
         android:paddingStart="8dp"
         android:paddingEnd="8dp"
         android:paddingBottom="8dp"
-        android:progress="1" />
+        android:progress="0" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewFeed"

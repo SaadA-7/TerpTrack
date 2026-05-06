@@ -132,8 +132,7 @@ class MainActivity : AppCompatActivity() {
         val filtered = if (progress == 0) {
             items
         } else {
-            // Note: The SeekBar says "miles" but logic filters by conditionRating.
-            // Kept original logic intact to ensure existing functions don't break.
+            // Logic correctly filters by conditionRating (represented as stars in UI)
             items.filter { e -> e.conditionRating <= progress }
         }
         adapter.updateData(filtered)
