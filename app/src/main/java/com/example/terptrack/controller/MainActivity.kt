@@ -23,6 +23,11 @@ import com.umd.terptrack.controller.ItemAdapter
 import com.umd.terptrack.model.ItemRepository
 import com.umd.terptrack.model.LostItem
 
+// Participation Percentage - Everyone contributed fairly
+// 25% - Saad Ahmad
+// 25% - Ceyhun Yagar
+// 25% - Alexander Arshavskiy
+// 25% - Maxwell Pizzolato
 class MainActivity : AppCompatActivity() {
 
     private val repository = ItemRepository()
