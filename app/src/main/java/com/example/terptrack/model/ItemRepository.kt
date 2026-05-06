@@ -69,4 +69,16 @@ class ItemRepository {
                 onFailure(e)
             }
     }
+
+    fun deleteItem(documentId: String, onSuccess: () -> Unit, onFailure: (Exception) -> Unit) {
+        collectionRef.document(documentId).delete()
+            .addOnSuccessListener {
+                Log.d("Firebase", "Item $documentId is deleted")
+                onSuccess()
+            }
+            .addOnFailureListener { e ->
+                Log.w("Firebase", "Error occured while deleting document", e)
+                onFailure(e)
+            }
+    }
 }
