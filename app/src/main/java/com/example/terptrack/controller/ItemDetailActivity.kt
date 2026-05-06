@@ -76,7 +76,7 @@ class ItemDetailActivity : AppCompatActivity(), OnMapReadyCallback {
         findViewById<Button>(R.id.btnFound).setOnClickListener {
             AlertDialog.Builder(this)
                 .setTitle("Mark as Found?")
-                .setMessage("Are you sure you want to remove \"$title\" from the feed? This means the item has been returned to its owner.")
+                .setMessage("Are you sure you want to remove \"$itemTitle\" from the feed? This means the item has been returned to its owner.")
                 .setPositiveButton("Yes, it's found") { _, _ ->
                     repository.deleteItem(
                         documentId = documentId,
