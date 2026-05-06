@@ -38,11 +38,19 @@
             android:background="#E0E0E0"
             android:contentDescription="Item photo" />
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Condition Rating:"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:layout_marginTop="12dp"/>
+
         <RatingBar
             android:id="@+id/ratingDetailCondition"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="4dp"
             android:numStars="5"
             android:stepSize="1"
             android:isIndicator="true"
@@ -56,7 +64,6 @@
             android:textSize="15sp"
             android:lineSpacingMultiplier="1.4" />
 
-        <!-- PART 3: Google Map -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

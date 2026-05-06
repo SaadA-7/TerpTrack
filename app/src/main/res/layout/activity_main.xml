@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Layout: RecyclerView 80% Report Button 10% Ad placeholder 10% -->
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -10,7 +9,6 @@
     android:orientation="vertical"
     tools:context=".controller.MainActivity">
 
-    <!-- Welcome banner — text is set from SharedPreferences in MainActivity.kt -->
     <TextView
         android:id="@+id/tvWelcome"
         android:layout_width="match_parent"
@@ -24,7 +22,6 @@
         android:textColor="@color/colorPrimary"
         tools:text="Welcome back, Terrappin!" />
 
-    <!-- Row: "Filter by Distance" label + live value-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -37,17 +34,16 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Filter by Distance"
+            android:text="Filter by Max Condition"
             android:textStyle="bold" />
 
-        <!-- Updated live by the SeekBar listener -->
         <TextView
             android:id="@+id/tvSeekValue"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textStyle="bold"
             android:textColor="@color/colorPrimary"
-            tools:text="1 mi" />
+            tools:text="1 star" />
     </LinearLayout>
 
     <SeekBar
@@ -60,8 +56,6 @@
         android:paddingBottom="8dp"
         android:progress="1" />
 
-    <!--RecyclerView for the items that we have
-     We can build the layout of the contents by code  -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewFeed"
         android:layout_width="match_parent"
@@ -74,7 +68,6 @@
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         />
 
-    <!--button to go to the report screen-->
     <Button
         android:id="@+id/btnReport"
         android:layout_width="match_parent"
@@ -86,7 +79,6 @@
         android:backgroundTint="@color/colorPrimary"
         android:textColor="@android:color/white" />
 
-    <!--button to go to the settings screen-->
     <Button
         android:id="@+id/btnSettings"
         android:layout_width="match_parent"
@@ -96,7 +88,6 @@
         android:backgroundTint="#455A64"
         android:textColor="@android:color/white" />
 
-    <!-- this is the linear layout for the ad banner-->
     <LinearLayout
         android:id="@+id/ad_view"
         android:layout_width="match_parent"

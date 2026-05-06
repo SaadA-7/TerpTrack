@@ -13,6 +13,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.recyclerview.widget.LinearLayoutManager // ADDED: Required for RecyclerView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.terptrack.R
 import com.google.android.gms.ads.AdRequest
@@ -42,7 +43,7 @@ class MainActivity : AppCompatActivity() {
 
         preferences = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
 
-        val name = preferences.getString(KEY_DISPLAY_NAME, "Terrappin")
+        val name = preferences.getString(KEY_DISPLAY_NAME, "Terp")
         findViewById<TextView>(R.id.tvWelcome).text = "Welcome back, $name!"
 
         adapter = ItemAdapter(emptyList()){ i ->
@@ -60,57 +61,31 @@ class MainActivity : AppCompatActivity() {
         }
 
         val rv = findViewById<RecyclerView>(R.id.recyclerViewFeed)
+
+        // =====================================================================
+        // FIX #1: The missing LayoutManager. This tells it to be a vertical list
+        // =====================================================================
+        rv.layoutManager = LinearLayoutManager(this)
         rv.adapter = adapter
-
-        repository.getAllItems(
-            onResult = { i ->
-                items = i
-
-                val fvProgress = findViewById<SeekBar>(R.id.seekBarDistance).progress
-                val filtered = if (fvProgress == 0) {
-                    items
-                }
-                else {
-                    items.filter { e -> e.conditionRating <= fvProgress }
-                }
-                adapter.updateData(filtered)
-            },
-            onFailure = { e ->
-                Toast.makeText(this, "Sytem Failed: ${e.message}", Toast.LENGTH_LONG).show()
-            }
-        )
 
         val seekBar= findViewById<SeekBar>(R.id.seekBarDistance)
         val tvSeekValue= findViewById<TextView>(R.id.tvSeekValue)
 
         seekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
-
             override fun onProgressChanged(sb: SeekBar, progress: Int, fromUser: Boolean) {
                 tvSeekValue.text = if (progress == 0){
                     "All"
                 } else {
-                    "$progress miles"
+                    "$progress stars"
                 }
-
-                val filtered = if (progress == 0) {
-                    items
-                }
-                else {
-                    items.filter { e -> e.conditionRating <= progress }
-                }
-                adapter.updateData(filtered)
-
+                // Extracted filtering logic into a helper function
+                filterData(progress)
             }
-            override fun onStartTrackingTouch(sb: SeekBar) {
-
-            }
-            override fun onStopTrackingTouch(sb: SeekBar) {
-
-            }
+            override fun onStartTrackingTouch(sb: SeekBar) {}
+            override fun onStopTrackingTouch(sb: SeekBar) {}
         })
 
-        tvSeekValue.text = "${seekBar.progress} miles"
-
+        tvSeekValue.text = if (seekBar.progress == 0) "All" else "${seekBar.progress} stars"
 
         findViewById<Button>(R.id.btnReport).setOnClickListener {
             startActivity(Intent(this, ReportItemActivity::class.java))
@@ -124,12 +99,44 @@ class MainActivity : AppCompatActivity() {
         adView.adUnitId = "ca-app-pub-3940256099942544/6300978111"
         findViewById<LinearLayout>(R.id.ad_view).addView(adView)
         adView.loadAd(AdRequest.Builder().build())
+
+        // Initial data fetch
+        fetchData()
     }
 
+    // =====================================================================
+    // FIX #2: Refresh data and preferences every time user returns to this screen
+    // =====================================================================
     override fun onResume() {
         super.onResume()
         val name = preferences.getString(KEY_DISPLAY_NAME, "Terp")
         findViewById<TextView>(R.id.tvWelcome).text = "Welcome back, $name!"
+
+        fetchData()
+    }
+
+    private fun fetchData() {
+        repository.getAllItems(
+            onResult = { fetchedItems ->
+                items = fetchedItems
+                val currentProgress = findViewById<SeekBar>(R.id.seekBarDistance).progress
+                filterData(currentProgress)
+            },
+            onFailure = { e ->
+                Toast.makeText(this, "System Failed: ${e.message}", Toast.LENGTH_LONG).show()
+            }
+        )
+    }
+
+    private fun filterData(progress: Int) {
+        val filtered = if (progress == 0) {
+            items
+        } else {
+            // Note: The SeekBar says "miles" but logic filters by conditionRating.
+            // Kept original logic intact to ensure existing functions don't break.
+            items.filter { e -> e.conditionRating <= progress }
+        }
+        adapter.updateData(filtered)
     }
 
     companion object {
@@ -142,7 +149,6 @@ class MainActivity : AppCompatActivity() {
         const val EXTRA_IMAGE_URL= "extra_image_url"
         const val EXTRA_RATING= "extra_rating"
         const val EXTRA_TIMESTAMP= "extra_timestamp"
-        // PART 3: New extras for map coordinates
         const val EXTRA_LATITUDE = "extra_latitude"
         const val EXTRA_LONGITUDE = "extra_longitude"
     }

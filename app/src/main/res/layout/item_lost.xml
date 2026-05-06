@@ -35,12 +35,22 @@
             android:text="Building Name"
             android:textSize="14sp"/>
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Condition:"
+            android:textSize="12sp"
+            android:layout_marginTop="6dp"
+            android:textStyle="bold"
+            android:textColor="#777777"/>
+
         <RatingBar
             android:id="@+id/ratingItemCondition"
             style="?android:attr/ratingBarStyleSmall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:numStars="5"
-            android:layout_marginTop="4dp"/>
+            android:isIndicator="true"
+            android:layout_marginTop="2dp"/>
     </LinearLayout>
 </LinearLayout>
